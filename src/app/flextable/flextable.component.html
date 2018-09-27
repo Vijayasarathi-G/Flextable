@@ -1,0 +1,68 @@
+<div class="box-container" fxLayout="column" [ngStyle.lt-sm]="'min-height: 800px;'">
+  <mat-card>
+    <mat-card-actions>
+      View by Grade : &nbsp;&nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="scrollToY('G2')">G2</button>&nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="scrollToY('G4')">G4</button>&nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="scrollToY('G6')">G6</button>&nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="scrollToY('G8')">G8</button>&nbsp;&nbsp;
+    </mat-card-actions>
+    <mat-card-actions>
+      Add Row by Grade : &nbsp;&nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="addElement('G2')"><mat-icon>add</mat-icon></button>&nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="addElement('G4')"><mat-icon>add</mat-icon></button>&nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="addElement('G6')"><mat-icon>add</mat-icon></button>&nbsp;&nbsp;
+      <button mat-raised-button color="primary" (click)="addElement('G8')"><mat-icon>add</mat-icon></button>&nbsp;&nbsp;
+    </mat-card-actions>
+  </mat-card>
+  <br>
+  <br>
+  <div fxFlex="75%">
+    <perfect-scrollbar [config]="config" class="scroll-container" fxFlex="auto" [scrollIndicators]="true" (psXReachEnd)="onScrollEvent($event)"
+      (psYReachEnd)="onScrollEvent($event)" (psXReachStart)="onScrollEvent($event)" (psYReachStart)="onScrollEvent($event)">
+      <div class="mat-elevation-z8 scrollable-content" [perfectScrollbar]="config">
+        <mat-table id="table" #table [dataSource]="dataSource" matSort>
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-checkbox  (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox class="check" [disabled]="true" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+            <!--<mat-cell *matCellDef="let element; let i = index"> {{i}} </mat-cell>-->
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+
+          <!-- Grade Column -->
+          <ng-container matColumnDef="grade">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Grade </mat-header-cell>
+            <mat-cell *matCellDef="let element; let i = index" class="grade" (click)="groupCheck(element.grade,i)"> {{element.grade}} </mat-cell>
+          </ng-container>
+
+          <!-- Salary Column -->
+          <ng-container matColumnDef="salary">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Salary </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.salary}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)" (click) = "row.highlighted = !row.highlighted"
+            [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}" (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+        </mat-table>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>

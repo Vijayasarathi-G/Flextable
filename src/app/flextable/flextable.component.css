@@ -1,0 +1,69 @@
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+
+.example-container {
+    display: flex;
+    flex-direction: column; 
+    margin-top: 10px;  
+  }
+  
+  .mat-card{
+    border-radius: 8px;  
+  }
+
+  .mat-table {
+    overflow: auto;  
+    border-radius: 1%;
+  }
+  
+  .mat-header-cell.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .app-title {
+    font-size: 24px;
+  }
+  
+  .box-title {
+    font-size: 20px;
+  }
+  
+  .box-container {
+    box-sizing: border-box;
+    width: 800px;
+    height: 750px;
+    max-width: 90%;
+    max-height: 100%;
+    padding: 24px;
+    margin: 24px auto;
+    border-radius: 4px;
+    color: #555;
+    background-color: #eee;
+    box-shadow:
+      0 6px 20px rgba(0, 0, 0, 0.18),
+      0 6px 6px rgba(0, 0, 0, 0.25);
+  }
+ 
+  .scroll-container {
+    position: relative;
+  }
+  
+  .mat-card>.mat-card-actions:last-child {
+    margin: -10px;
+    padding: 0;
+  }
+  mat-cell {
+    overflow: visible;
+  }
+  td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+    padding: 3px;
+    border-bottom-width: 0;
+    border-bottom-style: none;
+}
+
+.grade{
+  cursor: pointer;
+}
+
+.check{
+  cursor:default;
+}

@@ -3,17 +3,21 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "DeltaAngular": {
+    "Admin-dashboard-angular": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/DeltaAngular",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -23,11 +27,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles.scss",
+              "src/assets/scss/Admin.scss"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/chart.js/dist/Chart.min.js",
+              "node_modules/clipboard/dist/clipboard.min.js"
             ]
           },
           "configurations": {
@@ -53,18 +59,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "DeltaAngular:build"
+            "browserTarget": "Admin-dashboard-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "DeltaAngular:build:production"
+              "browserTarget": "Admin-dashboard-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "DeltaAngular:build"
+            "browserTarget": "Admin-dashboard-angular:build"
           }
         },
         "test": {
@@ -75,6 +81,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": [],
@@ -98,7 +105,7 @@
         }
       }
     },
-    "DeltaAngular-e2e": {
+    "Admin-dashboard-angular-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -106,11 +113,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "DeltaAngular:serve"
+            "devServerTarget": "Admin-dashboard-angular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "DeltaAngular:serve:production"
+              "devServerTarget": "Admin-dashboard-angular:serve:production"
             }
           }
         },
@@ -126,5 +133,13 @@
       }
     }
   },
-  "defaultProject": "DeltaAngular"
+  "defaultProject": "Admin-dashboard-angular",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
 }
